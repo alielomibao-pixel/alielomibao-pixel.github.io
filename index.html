@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alie Lomibao — Web Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F3FA;
+    --warm-white: #FAFAFF;
+    --ink: #1E1A2E;
+    --ink-soft: #4A4560;
+    --ink-muted: #9893AC;
+    --accent: #7C5CBF;
+    --accent-light: #E4DCFA;
+    --border: rgba(30,26,46,0.1);
+    --border-soft: rgba(30,26,46,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(253,252,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 42%;
+    background: #EDE8FA;
+    z-index: 0;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 2rem;
+    background: var(--ink);
+    color: var(--warm-white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover { background: var(--accent); transform: translateY(-1px); }
+  .hero-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  .hero-visual {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    width: 100%; max-width: 380px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -8px; left: -8px;
+    right: 8px; bottom: 8px;
+    border: 1px solid #C9B8F0;
+    z-index: -1;
+  }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .stat { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 0.25rem;
+  }
+  .stat-divider { grid-column: 1 / -1; height: 1px; background: var(--border-soft); }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-light);
+    padding-bottom: 0.15rem;
+    transition: all 0.2s;
+  }
+  .project-link:hover {
+    border-bottom-color: var(--accent);
+    gap: 0.4rem;
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--accent);
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+
+  /* AI VISIBILITY SECTION */
+  .ai-visibility { background: var(--warm-white); }
+  .ai-intro {
+    font-size: 1rem; color: var(--ink-soft); max-width: 560px;
+    line-height: 1.8; margin: 0.5rem 0 3rem;
+  }
+  .ai-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-bottom: 2.5rem;
+  }
+  .ai-card {
+    border: 1px solid var(--border); padding: 2rem 1.75rem;
+    transition: transform 0.2s;
+  }
+  .ai-card:hover { transform: translateY(-3px); }
+  .ai-card--featured {
+    border-color: var(--accent);
+    background: #F5F2FD;
+  }
+  .ai-icon {
+    color: var(--accent); margin-bottom: 1.25rem;
+  }
+  .ai-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; margin-bottom: 0.6rem;
+  }
+  .ai-card-desc {
+    font-size: 0.85rem; color: var(--ink-soft); line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+  .ai-tag {
+    display: inline-block; font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+  }
+  .ai-tag--neutral { border: 1px solid var(--border); color: var(--ink-muted); }
+  .ai-tag--accent { background: var(--accent); color: #fff; }
+  .ai-callout {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: #EDE8FA;
+    border-left: 3px solid var(--accent);
+    font-size: 0.9rem; color: var(--ink-soft); line-height: 1.75;
+    max-width: 720px;
+  }
+  .ai-callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .ai-callout strong { color: var(--ink); }
+
+  /* SERVICES */
+  .services { background: #EDE8FA; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3.5rem;
+  }
+  .service-item {
+    background: #EDE8FA;
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+  .service-item:hover { background: var(--warm-white); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+  .service-desc {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+
+  /* WORK */
+  .work { }
+  .work-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 4rem;
+    align-items: end;
+    margin-bottom: 3.5rem;
+  }
+  .work-desc { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.8; }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .project-card {
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,25,22,0.08);
+  }
+  .project-thumb {
+    width: 100%; height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb.bg1 { background: #EEE8E0; }
+  .project-thumb.bg2 { background: #E0E8EE; }
+  .project-thumb.bg3 { background: #E8E0EE; }
+  .project-thumb.bg4 { background: #E0EEE4; }
+  .project-thumb-label {
+    position: absolute;
+    bottom: 1rem; right: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: rgba(253,252,250,0.9);
+    color: var(--ink-soft);
+    padding: 0.3rem 0.7rem;
+  }
+  .project-info { padding: 1.5rem; }
+  .project-type {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .project-blurb {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+
+  /* ABOUT */
+  .about { background: #1E1A2E; color: var(--warm-white); }
+  .about .section-label { color: var(--accent); }
+  .about .section-label::before { background: var(--accent); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 3.5rem; }
+  .about h2 { color: var(--warm-white); }
+  .about-text { font-size: 0.9rem; color: rgba(253,252,250,0.65); line-height: 1.9; }
+  .about-text p + p { margin-top: 1rem; }
+  .skills-list { list-style: none; }
+  .skills-list li {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(253,252,250,0.08);
+    font-size: 0.85rem;
+  }
+  .skills-list li:first-child { border-top: 1px solid rgba(253,252,250,0.08); }
+  .skill-name { color: rgba(253,252,250,0.85); }
+  .skill-bar { width: 120px; height: 2px; background: rgba(253,252,250,0.12); position: relative; }
+  .skill-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent); }
+
+  /* CONTACT */
+  .contact { text-align: center; padding: 7rem 4rem; }
+  .contact-sub { font-size: 1rem; color: var(--ink-soft); max-width: 480px; margin: 1rem auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .contact-link svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.75; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.7s ease both; }
+  h1 { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-cta { animation: fadeUp 0.7s 0.3s ease both; }
+  .hero-visual { animation: fadeUp 0.7s 0.2s ease both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; }
+    .hero::after { display: none; }
+    .hero-card { max-width: 100%; }
+    section { padding: 4rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .work-intro { grid-template-columns: 1fr; gap: 1rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Alie Lomibao</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#ai-visibility">AI Visibility</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Web Creator &amp; Developer</p>
+    <h1>Websites that<br>humans love —<br><em>AI finds.</em></h1>
+    <p class="hero-desc">I build clean, purposeful websites for local businesses that look great to visitors <em>and</em> are structured to be discovered by AI tools like ChatGPT, Google AI Overviews, and Perplexity — so your business gets found in the new era of search.</p>
+    <a href="#work" class="hero-cta">
+      View My Work
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Projects completed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">HTML</div>
+          <div class="stat-label">Core skill</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Niches served</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Client satisfaction</div>
+        </div>
+      </div>
+      <p class="hero-tagline">"Visible to people. Readable by AI."</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label">What I Do</p>
+  <h2>Services</h2>
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-title">Business &amp; Corporate Sites</div>
+      <p class="service-desc">Professional websites built with clean, semantic HTML so they rank on Google <em>and</em> get cited by AI tools — giving your business visibility across every channel people use to search.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-title">Portfolio &amp; Creative Sites</div>
+      <p class="service-desc">Elegant personal sites built to impress human visitors and structured so AI assistants can accurately describe your work when someone asks about you online.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-title">AI-Ready Web Presence</div>
+      <p class="service-desc">Every site I build includes proper semantic markup, structured data, and fast load times — the foundation that makes your business legible to AI search engines, not just traditional ones.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- AI VISIBILITY -->
+<section class="ai-visibility" id="ai-visibility">
+  <p class="section-label">Why It Matters</p>
+  <h2>The new way people<br>find businesses.</h2>
+  <p class="ai-intro">Your customers are no longer just Googling — they're asking AI. If your website isn't structured correctly, you simply don't exist to those tools.</p>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <h3 class="ai-card-title">Traditional SEO</h3>
+      <p class="ai-card-desc">People search on Google and click a link. A well-structured site with good content ranks higher. This still matters — and I build for it.</p>
+      <div class="ai-tag ai-tag--neutral">Still important</div>
+    </div>
+    <div class="ai-card ai-card--featured">
+      <div class="ai-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="19" cy="5" r="3" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <h3 class="ai-card-title">AI Search Visibility</h3>
+      <p class="ai-card-desc">People ask ChatGPT, Perplexity, or Google AI "find me a dentist near me." The AI reads websites and picks the clearest, best-structured ones to recommend.</p>
+      <div class="ai-tag ai-tag--accent">The new frontier</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3 class="ai-card-title">What I Build</h3>
+      <p class="ai-card-desc">Clean semantic HTML, proper headings, structured content, and fast load times — the exact signals that make AI tools trust and recommend your business.</p>
+      <div class="ai-tag ai-tag--neutral">My approach</div>
+    </div>
+  </div>
+  <div class="ai-callout">
+    <span class="ai-callout-icon">💡</span>
+    <p><strong>The truth:</strong> A beautifully designed website that AI can't read is like a great shop with no street address. I make sure your business is findable <em>everywhere</em> people are searching — human or AI.</p>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-intro">
+    <div>
+      <p class="section-label">Portfolio</p>
+      <h2>Selected Work</h2>
+    </div>
+    <p class="work-desc">A selection of projects built for local businesses. Each site is crafted to look professional to visitors and structured to be readable by AI — so clients get found across Google, ChatGPT, and beyond.</p>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-thumb bg1">
+        <span>SmileCare Dental</span>
+        <span class="project-thumb-label">Business Site</span>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Business Website</p>
+        <p class="project-name">SmileCare Dental Clinic</p>
+        <p class="project-blurb">A clean, professional website for a local dental clinic. Features a services page, clinic hours, doctor profile, and an inquiry form — structured with semantic HTML so AI tools can surface it when people search for dental services nearby.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb bg2">
+        <span>TrustMech Auto</span>
+        <span class="project-thumb-label">Business Site</span>
+      </div>
+      <div class="project-info">
+        <p class="project-type">Business Website</p>
+        <p class="project-name">TrustMech Auto Shop</p>
+        <p class="project-blurb">A business website for a local auto repair shop with services, pricing, and testimonials — built with proper heading structure and readable content so AI assistants recommend it when someone asks for a nearby mechanic.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+        <a href="YOUR_TRUSTMECH_LINK_HERE" target="_blank" class="project-link">View Live Demo →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <p class="section-label">About Me</p>
+  <div class="about-grid">
+    <div>
+      <h2>Built for humans.<br><em style="font-style:italic;color:var(--accent)">Structured for AI.</em></h2>
+      <div class="about-text" style="margin-top:1.5rem;">
+        <p>Hi, I'm Alie — a web creator from the Philippines helping local businesses get online with websites that don't just look good, but <em>perform</em> in today's AI-driven world.</p>
+        <p>Most web designers only think about how a site looks. I also think about how it <em>reads</em> — to Google, to ChatGPT, to Perplexity. Clean HTML structure, proper headings, and meaningful content are what make a business show up when someone asks an AI for a recommendation.</p>
+        <p>If your competitor has a website but you don't — or yours is outdated — you're already invisible to a whole generation of searchers. I'm here to change that.</p>
+      </div>
+    </div>
+    <div>
+      <ul class="skills-list">
+        <li>
+          <span class="skill-name">HTML</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">CSS</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Responsive Design</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">JavaScript (learning)</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">AI Visibility (Semantic HTML)</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Attention to Detail</span>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label" style="justify-content:center;">Get In Touch</p>
+  <h2>Let's work together.</h2>
+  <p class="contact-sub">Have a project in mind? Let's build you a website that looks great to customers — and gets found by AI. Reach out and let's talk.</p>
+  <div class="contact-links">
+    <a href="mailto:alielomibao8@gmail.com" class="contact-link">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      alielomibao8@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/alie-lomibao/" target="_blank" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Alie Lomibao</span>
+  <span>Web Creator · Philippines</span>
+</footer>
+
+</body>
+</html>
